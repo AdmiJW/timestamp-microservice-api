@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+<head>
+    <meta charset='UTF-8'/>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'/>
+    <meta name='author' content='AdmiJW'/>
+    <title>Timestamp Microservice</title>
+
+    <!-- Fav icon -->
+    <link rel='shortcut icon' type='image/svg' href='/public/assets/clock.svg'/>
+
+    <!-- Style -->
+    <link rel='stylesheet' type='text/css' href='/public/style/style.css'/>
+    
+    <!-- Javascript -->
+    <script defer src='/public/script/script.js'></script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+
+    <!-- Jquery (For Bootstrap), Bootstrap CSS and JS -->
+    <script src="https://code.jquery.com/jquery-3.6.0.slim.min.js" integrity="sha256-u7e5khyithlIdTpu22PHhENmPcRdFiHRjhAuHcs05RI=" crossorigin="anonymous"></script>
+    <link rel='stylesheet' type='text/css' href='https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css'/>
+    <script src='https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js'></script>
+    
+    <!-- Font Awesome -->
+    <script src="https://kit.fontawesome.com/7c7cd4fe53.js" crossorigin="anonymous"></script>
+
+</head>
+
+
+<body>
+    
+    <!------------>
+    <!-- NAVBAR--->
+    <!------------>
+    <nav class='navbar sticky-top navbar-expand-lg navbar-dark bg-dark'>
+    <div class='container'>
+        <!-- Brand -->
+        <a href='#' class='navbar-brand'>⌚ Timestamp Microservice ⌚</a>
+
+        <!-- Nav Button -->
+        <button class='navbar-toggler' type='button' data-toggle='collapse' data-target='#navbar-collapsible'>
+            <span class='navbar-toggler-icon'></span>
+        </button>
+
+        <!-- Navigation items -->
+        <div class='collapse navbar-collapse text-light' id='navbar-collapsible'>
+            <ul class='navbar-nav ml-auto d-flex align-items-center'>
+                <!-- Clock -->
+                <li class='nav-item d-flex flex-column justify-content-center align-items-center' id='nav-clock'>
+                    <span id='nav-clock__title'>Time</span>
+                    <span id='nav-clock__time'>
+                        <span id='nav-clock__time__hour'></span>
+                        <span id='nav-clock__time__colon'></span>
+                        <span id='nav-clock__time__minutes'></span>
+                        <span id='nav-clock__time__ampm'></span>
+                    </span>
+                </li>
+                <!-- FreeCodeCamp -->
+                <li class='nav-item nav-link'>
+                    <a class='text-light' href='https://www.freecodecamp.org/admi_jw' rel='noreferrer' target='_blank'> 
+                        <i class="fab fa-free-code-camp"></i>
+                    </a>
+                </li>
+                <!-- Github-->
+                <li class='nav-item nav-link'>
+                    <a class='text-light' href='https://github.com/AdmiJW' target='_blank' rel='noreferrer'>
+                        <i class="fab fa-github-alt"></i>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    </nav>
+
+    <!------------------>
+    <!-- MAIN CONTENT -->
+    <!------------------>
+    <main class='container-fluid bg-light overflow-auto d-flex flex-column justify-content-center align-items-center py-5'>
+    <div class='container d-flex flex-column justify-content-center align-items-center' id='main_content'>
+        <h1 class='display-2 py-4'>⏱️ Get Started ⏱️</h1>
+        <p class='text-center lead py-4'>Returns the timestamp in both the Unix Epoch format as well as UTC time format</p>
+
+
+        <div class='w-100' id='accordion'>
+
+            <!-- Form -->
+            <div class='card my-3'>
+                <button class='btn btn-primary bg-primary card-header rounded-top d-flex justify-content-between' type='button' id='api__form__header' 
+                    data-toggle='collapse' data-target='#api__form__body' aria-expanded='false' aria-controls='api__form__body'>
+                    <span>Form Input</span>
+                    <span><i class="fas fa-plus"></i></span>
+                </button>
+
+                <div id='api__form__body' class='collapse collapsed' aria-labelledby='api__form__header' data-parent='#accordion'>
+                    <div class='card-body'>
+                        <div class='my-4' id='api__form__references'>
+                            <h4 class='lead text-center'>References</h4>
+                            <p class='text-center text-danger m-0'>2015-12-25</p>
+                            <p class='text-center text-danger m-0'>1451001600000</p>
+                        </div>
+
+                        <div class='my-5 text-center' id='api__form__now'>
+                            <h4 class='lead text-center'>Timestamp For This Very Moment</h4>
+                            <a href='./api/timestamp' class='btn btn-lg btn-success'>Get Timestamp For Current Time</a>
+                        </div>
+
+                        <h4 class='lead text-center'>Or Input your Date:</h4>
+                        <form class='text-center m-2 p-5' id='api__form__form'>
+                            <div class='form-group form-row justify-content-center'>
+                                <label for='date' class='col-form-label col-sm-3 text-center'>Date:</label>
+                                <input type='date' class='form-control col-sm-6' id='form__date' />
+                            </div>
+
+                            <h4 class='lead text-center'>Or</h4>
+
+                            <div class='form-group form-row justify-content-center'>
+                                <label for='date_str' class='col-form-label col-sm-3 text-center'>Date String:</label>
+                                <input type='text' class='form-control col-sm-6' id='form__date_str' placeholder='YYYY-MM-DD' />
+                            </div>
+
+                            <button type='submit' class='d-inline-block m-auto btn btn-success'>Go <i class="fas fa-paper-plane"></i></button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- Manual Guide -->
+            <div class='card my-3'>
+                <button class='btn btn-primary bg-primary card-header rounded-top d-flex justify-content-between' type='button' id='api__manual__header'
+                    data-toggle='collapse' data-target='#api__manual__body' aria-expanded='false' aria-controls='api__form__body'>
+                    <span>Manual Guide</span>
+                    <span><span><i class="fas fa-plus"></i></span></span>
+                </button>
+
+                <div id='api__manual__body' class='collapse collapsed' aria-labelledby='api__manual__header' data-parent='#accordion'>
+                    <div class='card-body d-flex flex-column'>
+
+                        <div class='my-2' id='manual__usage'>
+                            <h4 class='lead text-center'>Usage</h4>
+                            <p class='text-center text-danger'>[URL]/api/timestamp/[time]</p>
+                        </div>
+
+                        <div class='text-center my-4' id='manual__example_usage'>
+                            <h4 class='lead text-center'>Example Usage</h4>
+                            <a class='btn btn-link m-0 p-0' href='#'>[URL]/api/timestamp/2015-12-25</a>
+                            <br>
+                            <a class='btn btn-link m-0 p-0' href='#'>[URL]/api/timestamp/1451001600000</a>
+                        </div>
+
+                        <div class='text-center my-2' id='manual__example_output'>
+                            <h4 class='lead text-center'>Example Output</h4>
+                            <code>{"unix":1451001600000, "utc":"Fri, 25 Dec 2015 00:00:00 GMT"}</code>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+    </main>
+</body>
+
+</html>

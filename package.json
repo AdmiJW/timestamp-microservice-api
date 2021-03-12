@@ -1,0 +1,15 @@
+{
+  "name": "project1-timestamp-microservice",
+  "version": "1.0.0",
+  "description": "FreeCodeCamp Project #1 - Timestamp Microservice by AdmiJW",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "author": "AdmiJW",
+  "license": "MIT",
+  "dependencies": {
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1"
+  }
+}

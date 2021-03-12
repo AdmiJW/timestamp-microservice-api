@@ -1,0 +1,52 @@
+//  NAV BAR
+nav {
+    .navbar-brand {
+        font-size: 1.8rem;
+    }
+
+    .nav-item {
+        margin: 1rem 2rem;
+    }
+
+    #nav-clock {
+        font-family: 'Orbitron', sans-serif;
+        &__title {
+            font-size: 1.8rem;
+        }
+        &__time {
+            font-size: 2.6rem;
+
+            &__colon {
+                display: inline-block;
+                width: 1px;
+            }
+        }
+    }
+
+    .nav-link {
+        font-size: 2.5rem;
+    }
+}
+
+
+@media screen and (min-width: 768px) {
+    nav {
+        .navbar-brand {
+            font-size: 2.6rem;
+        }
+    }
+}
+
+
+@media screen and (min-width: 992px) {
+    nav {
+        #nav-clock {
+            &__title {
+                font-size: 1.5rem;
+            }
+            &__time {
+                font-size: 2rem;
+            }
+        }
+    }
+}
