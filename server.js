@@ -2,10 +2,21 @@
 const express = require('express');
 const app = express();
 const path = require('path');
+const rateLimiter = require('express-rate-limit');
 require('dotenv').config();
 
+// Rate Limiter
+const staticRateLimit = rateLimiter({
+    windowMs: 1000 * 60 * 5,                // 5 minutes, 300 seconds
+    max: 300                                // Maximum of 300 requests allowed in 5m
+});
 
-app.use('/public', express.static('public') );
+const apiRateLimit = rateLimiter({
+    windowMs: 1000 * 60 * 5,                 // 5 minutes, 300 seconds
+    max: 600                                 // Maximum of 600 requests allowed in 5 min
+})
+
+app.use('/public', staticRateLimit, express.static('public') );
 
 
 //  CORS - to allow access from FreeCodeCamp
@@ -24,13 +35,13 @@ if (!process.env.DISABLE_XORIGIN) {
 
 
 
-app.get('/', (req,res)=> {
+app.get('/', apiRateLimit, (req,res)=> {
     res.statusCode = 200;
     res.sendFile( path.join(__dirname, 'views', 'index.html') );
 });
 
 
-app.get('/api/timestamp/:time?', (req,res)=> {
+app.get('/api/timestamp/:time?', apiRateLimit, (req,res)=> {
     const { time } = req.params;
 
     const converted_time = !time? Date.now(): /^\d+$/.test(time)? Number.parseInt(time): time;
