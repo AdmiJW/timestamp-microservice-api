@@ -3,6 +3,7 @@ const express = require('express');
 const app = express();
 const path = require('path');
 const rateLimiter = require('express-rate-limit');
+const helmet = require('helmet');
 require('dotenv').config();
 
 // Rate Limiter
@@ -14,18 +15,25 @@ const staticRateLimit = rateLimiter({
 const apiRateLimit = rateLimiter({
     windowMs: 1000 * 60 * 5,                 // 5 minutes, 300 seconds
     max: 600                                 // Maximum of 600 requests allowed in 5 min
-})
+});
+
 
 app.use('/public', staticRateLimit, express.static('public') );
 
+// HelmetJS for increased HTTP security
+app.use(helmet({
+    contentSecurityPolicy: {
+        useDefaults: true
+    }
+}));
 
-//  CORS - to allow access from FreeCodeCamp
+//  CORS configuration provided by FreeCodeCamp
 if (!process.env.DISABLE_XORIGIN) {
     app.use(function(req, res, next) {
         var allowedOrigins = ['https://narrow-plane.gomix.me', 'https://www.freecodecamp.com'];
         var origin = req.headers.origin || '*';
         if(!process.env.XORIG_RESTRICT || allowedOrigins.indexOf(origin) > -1){
-            console.log(origin);
+            console.log(`[VISIT] - ${origin}`);
             res.setHeader('Access-Control-Allow-Origin', origin);
             res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
         }
@@ -34,7 +42,9 @@ if (!process.env.DISABLE_XORIGIN) {
 }
 
 
-
+//====================================
+// ROUTES
+//====================================
 app.get('/', apiRateLimit, (req,res)=> {
     res.statusCode = 200;
     res.sendFile( path.join(__dirname, 'views', 'index.html') );
@@ -55,6 +65,9 @@ app.get('/api/timestamp/:time?', apiRateLimit, (req,res)=> {
     else 
         res.json({'error': 'Invalid Date'});
 });
+
+
+
 
 
 app.listen( process.env.PORT || 3000, ()=> {

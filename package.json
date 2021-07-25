@@ -4,13 +4,14 @@
   "description": "FreeCodeCamp Project #1 - Timestamp Microservice by AdmiJW",
   "main": "server.js",
   "scripts": {
-    "start": "NODE_ENV=production node server.js"
+    "start": "node server.js"
   },
   "author": "AdmiJW",
   "license": "MIT",
   "dependencies": {
-    "dotenv": "^8.2.0",
+    "dotenv": "^8.6.0",
     "express": "^4.17.1",
-    "express-rate-limit": "^5.3.0"
+    "express-rate-limit": "^5.3.0",
+    "helmet": "^4.6.0"
   }
 }
