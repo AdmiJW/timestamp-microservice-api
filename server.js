@@ -23,7 +23,11 @@ app.use('/public', staticRateLimit, express.static('public') );
 // HelmetJS for increased HTTP security
 app.use(helmet({
     contentSecurityPolicy: {
-        useDefaults: true
+        useDefaults: true,
+        directives: {
+            scriptSrc: ["'self'", "code.jquery.com", "kit.fontawesome.com", "stackpath.bootstrapcdn.com"],
+            connectSrc: ["'self'", "fontawesome.com", "*.fontawesome.com"]
+        }
     }
 }));
 
