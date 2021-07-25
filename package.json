@@ -4,7 +4,7 @@
   "description": "FreeCodeCamp Project #1 - Timestamp Microservice by AdmiJW",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js"
+    "start": "NODE_ENV=production node server.js"
   },
   "author": "AdmiJW",
   "license": "MIT",
